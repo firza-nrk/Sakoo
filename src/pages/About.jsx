@@ -1,28 +1,76 @@
+/* Import Motion */
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-import HeroLandingPage from "../assets/image/hero-landingpage-image.png";
+/* Import Picture */
+import { Icon } from "@iconify/react";
+import HeroLandingPage from "../assets/image/hero-ilustration-about.png";
 
+/* Import Navbar & Footer */
 import Navbar from "../component/Navbar";
-
-import ParticleBg from "../component/ParticleBg";
+import Footer from "../component/Footer";
 
 function About() {
+  const features = [
+    {
+      icon: "prime:user",
+      name: "M. Dzafadhlan F Muzzki",
+      id: "MC222D5Y1132",
+      job: "Machine Learning",
+    },
+    {
+      icon: "prime:user",
+      name: "Putri Pita Mutia",
+      id: "MC269D5X0767",
+      job: "Machine Learning",
+    },
+    {
+      icon: "prime:user",
+      name: "Mazdalifah Hanuranda",
+      id: "MC354D5X2056",
+      job: "MC354D5X2056",
+    },
+    {
+      icon: "prime:user",
+      name: "Ahmad Gaos Sanusi Sulasah",
+      id: "FC222D5Y1666",
+      job: "Front-end Developer",
+    },
+    {
+      icon: "prime:user",
+      name: "Fitri Rahmatullah Arza",
+      id: "FC127D5X0078",
+      job: "Front-end Developer",
+    },
+    {
+      icon: "prime:user",
+      name: "Hisyam Arief Zulfani",
+      id: "FC222D5Y1666",
+      job: "Front-end Developer",
+    },
+  ];
+
   return (
     <>
       <Navbar />
-      <div className="w-full overflow-x-hidden">
+      <div className="w-full bg-[#F3F3F3]">
         {/* Hero Section */}
-        <section className="text-white py-20 px-6 lg:px-20 lg:h-[100vh] text-center">
-          <ParticleBg />
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bottom flex flex-col pd text-white text-center bg-[#E1EDDF]"
+        >
+          {/* <ParticleBg /> */}
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl lg:text-5xl font-bold text-yellow-400 mb-4"
+            className="text-3xl md:text-[48px] font-bold text-[#204842] mb-4 md:mt-[31px] mt-[21px] "
           >
             Tentang Sakoo
           </motion.h1>
-          <p className="text-lg lg:text-xl mb-8">
+          <p className="text-lg text-[#1E1E1E] md:text-[24px] mt-[11px]">
             Solusi Aman Kelola dan Optimalkan Keuangan
           </p>
           <motion.img
@@ -31,117 +79,131 @@ function About() {
             transition={{ delay: 0.4 }}
             src={HeroLandingPage}
             alt="Hero"
-            className="mx-auto sm:w-[135px] md:w-[335px] lg:w-[535px]"
+            className="mx-auto sm:w-[135px] md:w-[826px] lg:w-[535px]"
           />
-        </section>
+        </motion.section>
 
         {/* Section: Kenapa Sakoo Hadir */}
-        <section className="bg-[#FFFF] py-12 px-6 text-center">
-          <h2 className="text-2xl lg:text-4xl font-bold text-[#F7B205] mb-4">
-            Kenapa Sakoo Hadir? ✨
-          </h2>
-          <p className="text-gray-800 max-w-3xl mx-auto">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col pd text-center md:h-[463px] h-[263px]"
+        >
+          <div className="flex align-center justify-center md:h-[70px] h-[35px] md:mt-[101px] mt-[55px] ">
+            <div className="flex flex-col justify-start h-full">
+              <Icon
+                icon="solar:star-fall-bold"
+                className="text-[#204842] w-[12px] h-[12px] md:w-6 md:h-6 "
+              />
+            </div>
+            <div className="flexr">
+              <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] mb-4">
+                Kenapa Sakoo Hadir?
+              </h2>
+            </div>
+            <div className="flex flex-col justify-end h-full">
+              <Icon
+                icon="solar:star-fall-bold"
+                className="text-[#204842] w-[12px] h-[12px] md:w-6 md:h-6"
+              />
+            </div>
+          </div>
+          <p className="text-[#000000] md:text-[24px] md:mt-[20px] text-[12px] mt-[10px] ">
             Mengatur keuangan itu penting, tapi sering terasa rumit. Sakoo hadir
-            untuk menyederhanakan langkahmu menuju keuangan yang lebih sehat...
+            untuk menyederhanakan langkahmu menuju keuangan yang lebih sehat.
+            Dengan Teknologi AI, Sakoo bisa bantu untuk memahami kondisi
+            finansial dan memberikan solusi yang tepat untuk masa depanmu.
           </p>
-        </section>
+        </motion.section>
 
         {/* Section: Misi Sakoo */}
-        <section className="text-white py-12 px-6 text-center">
-          <h2 className="text-2xl lg:text-4xl font-bold text-[#F7B205] mb-4">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col pd text-center bg-[#E1EDDF] md:h-[401px] h-[201px] rounded-[30px]"
+        >
+          <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] md:mt-[91px] mt-[31px]">
             Misi Sakoo
           </h2>
-          <p className="max-w-3xl mx-auto">
+          <p className="md:text-[24px] text-[12px] md:mt-[31px] mt-[21px] ">
             Membantu pengguna mengevaluasi kondisi keuangan mereka secara
-            sederhana...
+            sederhana. Memberikan rekomendasi solusi finansial yang mudah
+            dipahami, melalui analisis AI. Mendorong kebiasaan finansial yang
+            sehat untuk masa depan yang lebih baik.
           </p>
-        </section>
-
-        {/* Section: Apa yang Sakoo Bantu */}
-        <section className="bg-[#FFFF] py-12 px-6 text-center">
-          <h2 className="text-2xl lg:text-4xl font-bold text-[#F7B205] mb-4">
-            Apa yang Sakoo Bantu?
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left">
-            <ul className="list-disc ml-5">
-              <li>✅ Mengecek kesehatan finansial secara instan.</li>
-              <li>✅ Mengetahui kekuatan dan kelemahan keuanganmu.</li>
-            </ul>
-            <ul className="list-disc ml-5">
-              <li>✅ Mendapatkan tips memperbaiki kondisi keuangan.</li>
-              <li>✅ Menetapkan tujuan keuangan yang terukur.</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* Section: Apa yang Bikin Sakoo Beda */}
-        <section className="text-white py-12 px-6 text-center">
-          <h2 className="text-2xl lg:text-4xl font-bold text-[#F7B205] mb-4">
-            Apa yang Bikin Sakoo Beda?
-          </h2>
-          <p className="max-w-3xl mx-auto">
-            Mudah dipahami, personalisasi, cepat, praktis, dan cocok untuk semua
-            kalangan.
-          </p>
-        </section>
+        </motion.section>
 
         {/* Section: Meet The Team */}
-        <section className="bg-[#FFFF] py-12 px-6 text-center">
-          <h2 className="text-2xl lg:text-4xl font-bold text-[#F7B205] mb-8">
-            Meet The Team / Customer Support ✨
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">M. Dzafadhlan F Muzzki</p>
-              <p>MC222D5Y1132</p>
-              <p>Machine Learning</p>
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col pd md:h-[1037px] h-[750px] "
+        >
+          <div className="flex align-center justify-center md:h-[70px] h-[35px] md:mt-[101px] mt-[55px] ">
+            <div className="flex flex-col justify-start h-full">
+              <Icon
+                icon="solar:star-fall-bold"
+                className="text-[#204842] w-[12px] h-[12px] md:w-6 md:h-6 "
+              />
             </div>
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">Mazdalifah Hanuranda</p>
-              <p>MC354D5X2056</p>
-              <p>Machine Learning</p>
+            <div className="flexr">
+              <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] mb-4">
+                Meet The Team
+              </h2>
             </div>
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">Putri Rifa Mutia</p>
-              <p>MC269D5X0767</p>
-              <p>Front End & Back End</p>
-            </div>
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">Ahmad Gozes Sanusi Sulsah</p>
-              <p>FC222D5Y1666</p>
-              <p>Front End & Back End</p>
-            </div>
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">Hisyam Arief Zulfani</p>
-              <p>FC222D5Y1666</p>
-              <p>Front End & Back End</p>
-            </div>
-            <div className="bg-[#1d5047] text-white p-4 rounded-xl">
-              <p className="font-bold">Fitri Rahmatullah Arza</p>
-              <p>FC127D5X0078</p>
-              <p>Front End & Back End</p>
+            <div className="flex flex-col justify-end h-full">
+              <Icon
+                icon="solar:star-fall-bold"
+                className="text-[#204842] w-[12px] h-[12px] md:w-6 md:h-6"
+              />
             </div>
           </div>
-        </section>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-[14px] md:gap-x-[74px] md:gap-y-[54px] cursor-pointer md:mt-[56px] mt-[21px]  ">
+            {features.map((item, idx) => (
+              <div
+                key={item.idx || idx}
+                className="flex md:h-[170px] md:w-[600px] md:px-[32px] md:py-[19px] px-[16px] py-[11px] border rounded-lg"
+              >
+                <Icon icon={item.icon} className="text-[#1E1E1E] w-10 h-10" />
+                <div className="md:ml-[22px] ml-[12px]">
+                  <h1 className="text-[16px] md:text-[32px] font-bold text-[#204842]">
+                    {item.name || "Tanpa Nama"}
+                  </h1>
+                  <h2 className="text-[12px] md:text-[24px] font-semibold text-[#1E1E1E]">
+                    {item.id || "Tanpa Nama"}
+                  </h2>
+                  <button className="w-[155px] md:w-[275px] bg-[#BBF49D] text-[12px] md:text-[24px] font-semibold text-[#1E1E1E] opacity-80 rounded-[10px] mt-[5px] ">
+                    {item.job || "Tanpa Nama"}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
 
         {/* Section: Penutup */}
-        <section className="bg-[#1d5047] text-white text-center py-10 px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#F7B205] mb-4">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="top flex flex-col justify-center bg-[#E1EDDF] md:h-[412px] text-center py-10 px-6"
+        >
+          <h1 className="text-[19px] md:text-[48px] font-bold text-[#204842] mb-4">
             Sakoo — Teman Setia Finansialmu!
-            <br />
+          </h1>
+          <p className="text-[16px] md:text-[40px] font-semibold text-[#204842] opacity-80">
             Cek, rencanakan, dan wujudkan masa depan
             <br />
             keuangan yang lebih cerah bersama Sakoo.
-          </h2>
+          </p>
           <p className="max-w-2xl mx-auto"></p>
-        </section>
+        </motion.section>
 
         {/* Footer */}
-        <footer className="text-center text-sm text-gray-200 bg-[#1d5047] py-4">
-          © 2025 Sakoo. All rights reserved.
-          <br />
-          Sakoo — Membantu Kamu Mengelola Keuangan dengan Mudah
-        </footer>
+        <Footer />
       </div>
     </>
   );

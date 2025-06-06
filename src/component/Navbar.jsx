@@ -1,43 +1,51 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Cek Keuangan", path: "/cek-keuangan" },
-    { name: "About Us", path: "/about" },
+    { name: "Beranda", path: "/" },
+    { name: "Tentang Sakoo", path: "/about" },
+    { name: "Fitur Utama", path: "/cek-keuangan" },
   ];
 
   return (
-    <nav className="bg-white w-full px-6 py-3 shadow-md fixed top-0 z-50">
+    <nav className="bg-white w-full pd py-3 shadow-md sticky top-0 z-50">
+      {/* Dekstop Navbar */}
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-extrabold text-[#F7B205] flex items-center"
+          className="text-2xl font-extrabold text-[#204842] flex items-center"
         >
           Sakoo
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6 font-semibold">
+        <div className="hidden md:flex items-center justify-between gap-6 font-semibold md:w-[428px]">
           {navItems.map((item) => (
             <Link
               key={item.name}
               to={item.path}
-              className="hover:text-[#313AB6] transition-colors"
+              className="hover:text-[#BAF699] transition-colors"
             >
               {item.name}
             </Link>
           ))}
         </div>
 
-        {/* Profile Icon */}
-        <div className="hidden md:block">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAgxJREFUSEvFloFNAzEMRdNJgEmATWASYBLoJMAksAn0ifunX/fnLj0JNVJVKef429/fiXftQmt3Idy2Bfi6tXbXWuP/ewqc/49zkhgFBuShtfa04FzgLxZQ13wE+HkFsDongP1hk3ObgMnydaJVDqDz80Dz25QVNiyov51YkS0B3Pey72WMwy8LF8DHAQo5RzkoC6sL3gN+t0ypWaVNjgEiKBdW1QPgN5XzBAy9clxBE/34TIy4NigNjM2rAjvFOKNGvn5WVO019SDJGuCZmQrs2eLEKfQMYIIsWN5miSFp5SjrCowRkZ5Qc1Ct6p5qpoATS/GcA9MSGLGgRRmJXQWVxOZM1WRghO+smUU3cgNUqOuwAic2FFRiw3UzJ9QDTmpPNQao7tfWc+CZLQdwByljMldmSdyxXydDdUPM2GtcFS0gbLiZ+PeFqMgmvVBewggcKen0LcD89CJVPfixyKRT7Q2f2gJnAuRB8AWwHo8aa1R8FZFH53T3rsoKUh8FL9/iBeJ0Syz1pWK/Uus1d3AX45Fg19qGKDXqkF26PNivL5JEpoBOziXgpReoPhpL9dS34WdRGXB9asLoXaMV2GvKt25vL81cgFZwHGmYg04FRq9ehdHnZABQpGvD3sh0mVq9p4XZdg1YhiMBaLrUINi5e/62R4E9AF0k0oLa618G+sXot3w8N+MtGPHML602mh+PBzzCAAAAAElFTkSuQmCC" />
+        {/* Login / Register */}
+        <div className="hidden md:block md:flex md:items-center">
+          <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
+            <Link to={"/login"}>Login</Link>
+          </button>
+          <div className="line"></div>
+          <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[5px]">
+            <Link to={"/register"}>Register</Link>
+          </button>
         </div>
 
         {/* Hamburger Button */}
@@ -50,7 +58,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -65,16 +73,21 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className="hover:text-[#313AB6]"
+                  className="hover:text-[#BAF699]"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <img
-                className="w-10 h-auto"
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAktJREFUSEvFVttx20AMPFwjkSux0olSieRKLFcSuZKoEiCzZ+AEgrgjlZmM+cMPglhgsXhQ+aaHvgm3/AvwoZRyrLUemPmugeN9eyaJvcCHWutJRM4T53ciujHzWynFAhqabwLXWi8bgNE5Avhg5suMgRnwgYjeQatzcCOiT2a+alagHQ+ofxWRk7O9i8jPUfYjYID+8YAi8msHhSjJ2QUwBE+Biei3ZUpEbwltLTMVGETlhRX1APCXSPsKuNb6bhEnoBn98HmLjHhtENGVmcFYfyKwpxjOUKOHMZHMVB1q6oNE1gDuzCyAfbbqpBuGDEA/BAa6e5sNGGpaiVkvgFVQiHRNzaPuq5q5gDOWTC+L/zzwUUVVlJaWkT0uqJXYAlOxfCdtS/hF6RqL3sgbQIWL6bPBBuhET2cK7rrxCY2AM7X3Caa1bEMkqX2cWB3Ya6ADeAfad6t5a1kPlJ32qwqrdcMoY1/jXosAAhssCj9GrY+xHLIN5UuIlmra8ZSmlAyyw2w+6loE2HAbjZiMwLYUVm2hATRAEXkNir8z86dl47+NFB8HSBdQGCCjURkJiUuhl286QNASbiuZWOKmAq2RWl/zDu7FGAW71TZXEWmnjqoz21T4FDeSiWz4X7YWZxtosTQiz76e7tu+tag/ABwz1i6MdIwmiu811W/j3p6suRW4jkQ75kBnCwwbqpTyIzl9VgdAn/0T4Kx2G+ZfnwdXy+LfzSvTqN953uK6tENwGuReYHPSr0ql2I76/3bQ76L4GaNnM37G99T2L14Yqy5IQHCTAAAAAElFTkSuQmCC"
-              />
+              <div className="flex flex-row items-center">
+                <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
+                  Login
+                </button>
+                <div className="line"></div>
+                <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[10px]">
+                  Register
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
