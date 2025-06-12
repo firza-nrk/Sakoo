@@ -3,13 +3,21 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useAuth } from "../hooks/useAuth";
+
+import UserProfile from "./UserProfile";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
 
   const navItems = [
     { name: "Beranda", path: "/" },
     { name: "Tentang Sakoo", path: "/about" },
-    { name: "Fitur Utama", path: "/cek-keuangan" },
+    {
+      name: "Fitur Utama",
+      path: `${isAuthenticated ? "/cek-keuangan" : "/wajib-login"}`,
+    },
   ];
 
   return (
@@ -38,15 +46,21 @@ const Navbar = () => {
         </div>
 
         {/* Login / Register */}
-        <div className="hidden md:block md:flex md:items-center">
-          <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
-            <Link to={"/login"}>Login</Link>
-          </button>
-          <div className="line"></div>
-          <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[5px]">
-            <Link to={"/register"}>Register</Link>
-          </button>
-        </div>
+        {isAuthenticated ? (
+          <div className="hidden md:flex items-center gap-4">
+            <UserProfile user={user} logout={logout} />
+          </div>
+        ) : (
+          <div className="hidden md:flex items-center">
+            <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
+              <Link to={"/login"}>Login</Link>
+            </button>
+            <div className="line"></div>
+            <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[5px]">
+              <Link to={"/register"}>Register</Link>
+            </button>
+          </div>
+        )}
 
         {/* Hamburger Button */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
@@ -79,15 +93,21 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="flex flex-row items-center">
-                <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
-                  Login
-                </button>
-                <div className="line"></div>
-                <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[10px]">
-                  Register
-                </button>
-              </div>
+              {isAuthenticated ? (
+                <div className="flex flex-row items-center">
+                  <UserProfile user={user} logout={logout} />
+                </div>
+              ) : (
+                <div className="flex flex-row items-center">
+                  <button className="h-[33px] text-[#2A2A2A] mr-3 font-semibold cursor-pointer">
+                    <Link to={"/login"}>Login</Link>
+                  </button>
+                  <div className="line"></div>
+                  <button className="w-[99px] h-[33px] bg-[#BAF699] ml-3 font-semibold cursor-pointer rounded-[10px]">
+                    <Link to={"/register"}>Register</Link>
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
