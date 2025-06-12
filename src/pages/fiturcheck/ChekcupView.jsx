@@ -442,8 +442,8 @@ const CheckupView = () => {
 
               {/* Tombol selesai */}
               <div className="flex justify-center">
-                <Link to="/">
-                  <button className="bg-[#BBF49D] text-[#204842] px-6 py-2 rounded-[30px] font-semibold hover:brightness-95 w-[301px]">
+                <Link to="/cek-keuangan/result">
+                  <button className="bg-[#BBF49D] text-[#204842] px-6 py-2 rounded-[30px] font-semibold hover:brightness-95 w-[301px] cursor-pointer">
                     Selesai
                   </button>
                 </Link>
@@ -460,28 +460,28 @@ const CheckupView = () => {
   // Navigasi next or before
   const nextStep = () => step < 5 && setStep(step + 1);
   const prevStep = () => step > 1 && setStep(step - 1);
-
   const handleSubmit = () => {
-    Swal.fire({
-      title: "Kirim Data?",
-      text: "Apakah kamu yakin ingin mengirim data Financial Checkup ini?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#204842",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, kirim!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setStep(step + 1);
-      }
-    });
+    prediksi();
+    // Swal.fire({
+    //   title: "Kirim Data?",
+    //   text: "Apakah kamu yakin ingin mengirim data Financial Checkup ini?",
+    //   icon: "question",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#204842",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Ya, kirim!",
+    //   cancelButtonText: "Batal",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     setStep(step + 1);
+    //   }
+    // });
   };
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#f6fdf6] py-8 px-4">
+      <div className="min-h-screen bg-[#e6f0e8] py-8 px-4">
         <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6">
           <h2 className="text-2xl font-semibold text-center text-green-900 mb-2">
             Finansial check up
@@ -499,7 +499,7 @@ const CheckupView = () => {
             {step > 1 && step < 6 ? (
               <button
                 onClick={prevStep}
-                className="bg-[#f1f8f4] text-gray-700 px-4 py-2 rounded-lg"
+                className="bg-[#f1f8f4] text-gray-700 px-4 py-2 rounded-lg cursor-pointer"
               >
                 Sebelumnya
               </button>
@@ -510,7 +510,7 @@ const CheckupView = () => {
               <button
                 onClick={step === 5 ? () => handleSubmit() : nextStep}
                 style={{ backgroundColor: "#BBF49D", color: "#204842" }}
-                className="px-4 py-2 rounded-lg hover:brightness-90"
+                className="px-4 py-2 rounded-lg hover:brightness-90 cursor-pointer"
               >
                 {step === 5 ? "Kirim" : "Selanjutnya"}
               </button>

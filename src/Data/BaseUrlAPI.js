@@ -1,9 +1,13 @@
 import axios from "axios";
 
-const based_url = "https://sakoo.my.id";
+const based_url = "https://flask.sakoo.my.id";
 
 const api = axios.create({
   baseURL: based_url,
 });
 
-export default api;
+const CONFIG = {
+  BASE_URL: "https://story-api.dicoding.dev/v1",
+};
+
+export default { api, CONFIG };

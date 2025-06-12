@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import ParticleBg from "./ParticleBg";
 import { Link } from "react-router-dom";
+import { registerModel } from "../Data/Api";
 
 const Register = () => {
   const [form, setForm] = useState({
-    nama: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -19,7 +20,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (form.password !== form.confirmPassword) {
       return Swal.fire({
         icon: "error",
@@ -29,7 +29,9 @@ const Register = () => {
     }
 
     try {
-      const response = await fakeRegister(form);
+      console.log(form);
+      const response = await registerModel.register(form);
+      console.log(response);
 
       if (response.success) {
         Swal.fire({
@@ -56,17 +58,17 @@ const Register = () => {
     }
   };
 
-  // Simulasi API call (ganti dengan fetch kalau pakai API asli)
-  const fakeRegister = (form) =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (form.email.includes("@")) {
-          resolve({ success: true });
-        } else {
-          reject(new Error("Email tidak valid"));
-        }
-      }, 1000);
-    });
+  // // Simulasi API call (ganti dengan fetch kalau pakai API asli)
+  // const fakeRegister = (form) =>
+  //   new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if (form.email.includes("@")) {
+  //         resolve({ success: true });
+  //       } else {
+  //         reject(new Error("Email tidak valid"));
+  //       }
+  //     }, 1000);
+  //   });
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -94,17 +96,17 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3 text-left">
             <label
-              htmlFor="nama"
+              htmlFor="name"
               className="block mb-1 text-sm font-medium text-gray-700"
             >
               Nama
             </label>
             <input
-              id="nama"
+              id="name"
               type="text"
               placeholder="Nama"
               required
-              value={form.nama}
+              value={form.name}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-[#0E4B40]"
             />

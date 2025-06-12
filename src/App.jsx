@@ -6,6 +6,7 @@ import PrivateToLogin from "./component/PrivateToLogin";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import FiturChekUp from "./pages/fiturcheck/ChekcupView";
+import Result from "./component/Result";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/cek-keuangan" element={<FiturChekUp />} />
         <Route path="/wajib-login" element={<PrivateToLogin />} />
+        <Route path="/cek-keuangan/result" element={<Result />} />
       </Routes>
     </Router>
   );
