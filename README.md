@@ -8,9 +8,12 @@ Selamat datang di dokumentasi untuk **Front-End** aplikasi **Sakoo**, platform e
 
 - [🧰 Teknologi Utama](#-teknologi-utama)
 - [🔧 Prasyarat](#-prasyarat)
+- [🚀 Instalasi dan Menjalankan Aplikasi](#-instalasi-dan-menjalankan-aplikasi)
+- [🌐 Struktur Proyek](#-struktur-proyek)
+- [📊 Fitur Utama](#-fitur-utama)
 - [🤝 Kontribusi](#-kontribusi)
 - [🧑‍💻 Pengembang](#-pengembang)
-- [🚀 Instalasi dan Menjalankan Aplikasi](#-instalasi-dan-menjalankan-aplikasi)
+
 
 ---
 
@@ -22,7 +25,7 @@ Selamat datang di dokumentasi untuk **Front-End** aplikasi **Sakoo**, platform e
 - React Router DOM
 - Framer Motion
 - Context API / LocalStorage
-
+  
 ---
 
 ## 🔧 Prasyarat
@@ -31,18 +34,9 @@ Pastikan telah menginstal:
 
 - Node.js dan npm
 - Git *(opsional)*
-
+  
 ---
 
-##🤝 Kontribusi
-Ingin berkontribusi? Fork repositori ini dan buat PR ke branch Front-end.
-
----
-
-##🧑‍💻 Pengembang
-Frontend Sakoo dikembangkan oleh tim Sakoo untuk memberikan edukasi finansial berbasis web yang intuitif dan mudah diakses.
-
----
 ## 🚀 Instalasi dan Menjalankan Aplikasi
 
 ```bash
@@ -59,6 +53,37 @@ npm install
 
 # Jalankan aplikasi
 npm run dev
+```
 ---
 
+## 🌐 Struktur Proyek
+
+```bash
+src/
+├── assets/          # Gambar & ikon
+├── authContext/         # Context Auth
+├── components/      # Komponen UI
+├── Data/             # API service
+├── pages/           # Halaman utama
+├── Hooks/           # Halaman utama
+└── App.jsx          # Root komponen
+```
+---
+
+## 📊 Fitur Utama
+- Registrasi
+- Login
+- Dasboard
+- Form Cek Finansial (stepper)
+- Visualisasi Hasil Checkup
+- Tampilan Responsif (Mobile & Desktop)
+---
+
+## 🤝 Kontribusi
+Ingin berkontribusi? Fork repositori ini dan buat PR ke branch Front-end.
+
+---
+
+## 🧑‍💻 Pengembang
+Frontend Sakoo dikembangkan oleh tim Sakoo untuk memberikan edukasi finansial berbasis web yang intuitif dan mudah diakses.
 
