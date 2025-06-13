@@ -28,7 +28,7 @@ function About() {
       icon: "prime:user",
       name: "Mazdalifah Hanuranda",
       id: "MC354D5X2056",
-      job: "MC354D5X2056",
+      job: "Machine Learning",
     },
     {
       icon: "prime:user",
@@ -61,16 +61,15 @@ function About() {
           transition={{ duration: 0.6 }}
           className="bottom flex flex-col pd text-white text-center bg-[#E1EDDF]"
         >
-          {/* <ParticleBg /> */}
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-[48px] font-bold text-[#204842] mb-4 md:mt-[31px] mt-[21px] "
+            className="text-2xl md:text-[40px] font-bold text-[#204842] mb-4 md:mt-[31px] mt-[21px] "
           >
             Tentang Sakoo
           </motion.h1>
-          <p className="text-lg text-[#1E1E1E] md:text-[24px] mt-[11px]">
+          <p className="text-[12px] text-[#1E1E1E] md:text-[24px] md:mt-[11px]">
             Solusi Aman Kelola dan Optimalkan Keuangan
           </p>
           <motion.img
@@ -98,7 +97,7 @@ function About() {
               />
             </div>
             <div className="flexr">
-              <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] mb-4">
+              <h2 className="text-2xl md:text-[40px] font-bold text-[#204842] mb-4">
                 Kenapa Sakoo Hadir?
               </h2>
             </div>
@@ -124,7 +123,7 @@ function About() {
           transition={{ duration: 0.6 }}
           className="flex flex-col pd text-center bg-[#E1EDDF] md:h-[401px] h-[201px] rounded-[30px]"
         >
-          <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] md:mt-[91px] mt-[31px]">
+          <h2 className="text-2xl md:text-[40px] font-bold text-[#204842] md:mt-[91px] mt-[31px]">
             Misi Sakoo
           </h2>
           <p className="md:text-[24px] text-[12px] md:mt-[31px] mt-[21px] ">
@@ -150,7 +149,7 @@ function About() {
               />
             </div>
             <div className="flexr">
-              <h2 className="text-2xl md:text-[48px] font-bold text-[#204842] mb-4">
+              <h2 className="text-2xl md:text-[40px] font-bold text-[#204842] mb-4">
                 Meet The Team
               </h2>
             </div>
@@ -169,7 +168,7 @@ function About() {
               >
                 <Icon icon={item.icon} className="text-[#1E1E1E] w-10 h-10" />
                 <div className="md:ml-[22px] ml-[12px]">
-                  <h1 className="text-[16px] md:text-[32px] font-bold text-[#204842]">
+                  <h1 className="text-[12px] md:text-[24px] font-bold text-[#204842]">
                     {item.name || "Tanpa Nama"}
                   </h1>
                   <h2 className="text-[12px] md:text-[24px] font-semibold text-[#1E1E1E]">
@@ -191,10 +190,10 @@ function About() {
           transition={{ duration: 0.6 }}
           className="top flex flex-col justify-center bg-[#E1EDDF] md:h-[412px] text-center py-10 px-6"
         >
-          <h1 className="text-[19px] md:text-[48px] font-bold text-[#204842] mb-4">
+          <h1 className="text-[19px] md:text-[40px] font-bold text-[#204842] mb-4">
             Sakoo — Teman Setia Finansialmu!
           </h1>
-          <p className="text-[16px] md:text-[40px] font-semibold text-[#204842] opacity-80">
+          <p className="text-[12px] md:text-[24px] font-semibold text-[#204842] opacity-80">
             Cek, rencanakan, dan wujudkan masa depan
             <br />
             keuangan yang lebih cerah bersama Sakoo.

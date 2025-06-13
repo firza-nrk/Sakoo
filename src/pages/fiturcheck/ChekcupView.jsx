@@ -11,12 +11,15 @@ import { Link } from "react-router-dom";
 
 const CheckupView = () => {
   const [step, setStep] = useState(1);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState(CheckupModel.initialData);
 
   // eslint-disable-next-line no-unused-vars
   const { handleChange, handleNumericBlur } = CheckupPresenter(
     formData,
-    setFormData
+    setFormData,
+    errors,
+    setErrors
   );
 
   // eslint-disable-next-line no-unused-vars
@@ -43,7 +46,64 @@ const CheckupView = () => {
     }
   };
 
-  const Input = ({ label, name, placeholder = "", prefix = "" }) => {
+  const validateStep = () => {
+    const newErrors = {};
+    if (step === 1) {
+      const fields = ["nama", "usia", "pekerjaan", "pendapatan", "tanggungan"];
+      fields.forEach((field) => {
+        if (!formData[field]?.trim()) {
+          newErrors[field] = `${field} wajib diisi`;
+        }
+      });
+    } else if (step === 2) {
+      const fields = [
+        "kebutuhan_pokok",
+        "tempat_tinggal",
+        "transportasi",
+        "pendidikan",
+        "kesehatan",
+        "komunikasi",
+        "hiburan",
+        "donasi",
+        "tidak_terduga",
+        "lainnya",
+        "pengeluaran",
+      ];
+      fields.forEach((field) => {
+        if (!formData[field]?.trim()) {
+          newErrors[field] = `${field} Wajib diisi`;
+        }
+      });
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const isNumericField = (name) =>
+    [
+      "usia",
+      "pendapatan",
+      "tanggungan",
+      "pengeluaran",
+      "kebutuhan_pokok",
+      "tempat_tinggal",
+      "transportasi",
+      "pendidikan",
+      "kesehatan",
+      "komunikasi",
+      "hiburan",
+      "donasi",
+      "tidak_terduga",
+      "lainnya",
+      "cicilan",
+      "aset",
+      "utang",
+      "darurat",
+      "tabungan",
+    ].includes(name);
+
+  // Komponen Input dan Select serta renderForm
+  const Input = ({ label, name, placeholder = "", prefix = "", error }) => {
     const [inputValue, setInputValue] = useState(formData[name]);
 
     const onInputChange = (e) => setInputValue(e.target.value);
@@ -87,12 +147,11 @@ const CheckupView = () => {
             onBlur={onInputBlur}
           />
         </div>
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
     );
   };
-
-  // Komponen Select dan renderForm seperti sebelumnya (bisa dipisah juga kalau perlu)
-  const Select = ({ label, name, value, onChange, options }) => (
+  const Select = ({ label, name, value, onChange, options, error }) => (
     <div className="mb-4">
       <label className="block text-gray-700 font-medium mb-1">{label}</label>
       <select
@@ -110,6 +169,7 @@ const CheckupView = () => {
           </option>
         ))}
       </select>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
   const renderForm = () => {
@@ -128,8 +188,14 @@ const CheckupView = () => {
               label="Nama Lengkap"
               name="nama"
               placeholder="Nama kamu siapa?"
+              error={errors.nama}
             />
-            <Input label="Usia" name="usia" placeholder="Contoh: 25" />
+            <Input
+              label="Usia"
+              name="usia"
+              placeholder="Contoh: 25"
+              error={errors.usia}
+            />
             <Select
               label="Jenis Pekerjaan"
               name="pekerjaan"
@@ -154,17 +220,20 @@ const CheckupView = () => {
                 "Pelajar",
                 "Lainnya",
               ]}
+              error={errors.pekerjaan}
             />
             <Input
               label="Pendapatan bulanan"
               name="pendapatan"
               prefix="Rp "
               placeholder="Contoh: 3000000"
+              error={errors.pendapatan}
             />
             <Input
               label="Jumlah Tanggungan"
               name="tanggungan"
               placeholder="Contoh: 2 orang"
+              error={errors.tanggungan}
             />
           </>
         );
@@ -458,24 +527,28 @@ const CheckupView = () => {
   };
 
   // Navigasi next or before
-  const nextStep = () => step < 5 && setStep(step + 1);
+  // const nextStep = () => step < 5 && setStep(step + 1);
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep((prev) => prev + 1);
+    }
+  };
   const prevStep = () => step > 1 && setStep(step - 1);
   const handleSubmit = () => {
-    prediksi();
-    // Swal.fire({
-    //   title: "Kirim Data?",
-    //   text: "Apakah kamu yakin ingin mengirim data Financial Checkup ini?",
-    //   icon: "question",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#204842",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Ya, kirim!",
-    //   cancelButtonText: "Batal",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     setStep(step + 1);
-    //   }
-    // });
+    Swal.fire({
+      title: "Kirim Data?",
+      text: "Apakah kamu yakin ingin mengirim data Financial Checkup ini?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#204842",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Ya, kirim!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setStep(step + 1);
+      }
+    });
   };
 
   return (

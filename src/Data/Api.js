@@ -7,7 +7,8 @@ const ENDPOINTS = {
 
 export const registerModel = {
   async register(name, email, password) {
-    const response = await fetch("https://story-api.dicoding.dev/v1/register", {
+    console.log(ENDPOINTS.BASE_URL);
+    const response = await fetch(ENDPOINTS.BASE_URL + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

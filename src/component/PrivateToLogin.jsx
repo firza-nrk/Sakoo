@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import ParticleBg from "./ParticleBg";
-
 import { Link } from "react-router-dom";
 
 const PrivateToLogin = () => {

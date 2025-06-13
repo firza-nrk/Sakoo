@@ -8,7 +8,7 @@ import { registerModel } from "../Data/Api";
 
 const Register = () => {
   const [form, setForm] = useState({
-    name: "",
+    nama: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -20,6 +20,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (form.password !== form.confirmPassword) {
       return Swal.fire({
         icon: "error",
@@ -29,9 +30,7 @@ const Register = () => {
     }
 
     try {
-      console.log(form);
       const response = await registerModel.register(form);
-      console.log(response);
 
       if (response.success) {
         Swal.fire({
@@ -96,17 +95,17 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3 text-left">
             <label
-              htmlFor="name"
+              htmlFor="nama"
               className="block mb-1 text-sm font-medium text-gray-700"
             >
               Nama
             </label>
             <input
-              id="name"
+              id="nama"
               type="text"
               placeholder="Nama"
               required
-              value={form.name}
+              value={form.nama}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-[#0E4B40]"
             />
