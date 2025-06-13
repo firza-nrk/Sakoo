@@ -55,7 +55,8 @@ const CheckupView = () => {
           newErrors[field] = `${field} wajib diisi`;
         }
       });
-    } else if (step === 2) {
+    }
+    if (step === 2) {
       const fields = [
         "kebutuhan_pokok",
         "tempat_tinggal",
@@ -75,32 +76,33 @@ const CheckupView = () => {
         }
       });
     }
+    if (step === 3) {
+      const fields = ["cicilan", "utang"];
+      fields.forEach((field) => {
+        if (!formData[field]?.trim()) {
+          newErrors[field] = `${field} Wajib diisi`;
+        }
+      });
+    }
+    if (step === 4) {
+      const fields = ["tabungan", "investasi", "danaDarurat", "aset"];
+      fields.forEach((field) => {
+        if (!formData[field]?.trim()) {
+          newErrors[field] = `${field} Wajib diisi`;
+        }
+      });
+    }
+    if (step === 5) {
+      const fields = ["tujuanKeuangan", "targetTahun", "sumberDana"];
+      fields.forEach((field) => {
+        if (!formData[field]?.trim()) {
+          newErrors[field] = `${field} Wajib diisi`;
+        }
+      });
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  const isNumericField = (name) =>
-    [
-      "usia",
-      "pendapatan",
-      "tanggungan",
-      "pengeluaran",
-      "kebutuhan_pokok",
-      "tempat_tinggal",
-      "transportasi",
-      "pendidikan",
-      "kesehatan",
-      "komunikasi",
-      "hiburan",
-      "donasi",
-      "tidak_terduga",
-      "lainnya",
-      "cicilan",
-      "aset",
-      "utang",
-      "darurat",
-      "tabungan",
-    ].includes(name);
 
   // Komponen Input dan Select serta renderForm
   const Input = ({ label, name, placeholder = "", prefix = "", error }) => {
@@ -151,6 +153,7 @@ const CheckupView = () => {
       </div>
     );
   };
+
   const Select = ({ label, name, value, onChange, options, error }) => (
     <div className="mb-4">
       <label className="block text-gray-700 font-medium mb-1">{label}</label>
@@ -252,60 +255,70 @@ const CheckupView = () => {
               name="kebutuhan_pokok"
               prefix="Rp "
               placeholder="Total untuk makan, minum, pakaian, kebutuhan dasar"
+              error={errors.kebutuhan_pokok}
             />
             <Input
               label="Tempat Tinggal"
               name="tempat_tinggal"
               prefix="Rp "
               placeholder="Sewa rumah/kos, cicilan KPR, listrik, air"
+              error={errors.tempat_tinggal}
             />
             <Input
               label="Transportasi"
               name="transportasi"
               prefix="Rp "
               placeholder="Biaya naik kendaraan umum/BBM/ojek online"
+              error={errors.transportasi}
             />
             <Input
               label="Pendidikan"
               name="pendidikan"
               prefix="Rp "
               placeholder="Biaya sekolah/kuliah untuk diri sendiri atau keluarga"
+              error={errors.pendidikan}
             />
             <Input
               label="Kesehatan"
               name="kesehatan"
               prefix="Rp "
               placeholder="Biaya berobat, obat-obatan, asuransi kesehatan"
+              error={errors.kesehatan}
             />
             <Input
               label="Komunikasi & Internet"
               name="komunikasi"
               prefix="Rp "
               placeholder="Paket data, Wi-Fi bulanan, pulsa"
+              error={errors.komunikasi}
             />
             <Input
               label="Gaya Hidup & Hiburan"
               name="hiburan"
               prefix="Rp "
               placeholder="Nongkrong, belanja non-prioritas, streaming, nonton, dll"
+              error={errors.hiburan}
             />
             <Input
               label="Sedekah & Donasi"
               name="donasi"
               prefix="Rp "
               placeholder="Zakat, infak, bantuan sosial"
+              error={errors.donasi}
             />
             <Input
               label="Pengeluaran Tidak Terduga"
               name="tidak_terduga"
               prefix="Rp "
               placeholder="Dana darurat, keperluan mendadak"
+              error={errors.tidak_terduga}
             />
             <Input
               label="Lainnya"
               name="lainnya"
               prefix="Rp "
               placeholder="Pengeluaran lain di luar kategori"
+              error={errors.lainnya}
             />
             <Input
               // label="Total Pengeluaran"
@@ -330,12 +343,14 @@ const CheckupView = () => {
               name="cicilan"
               prefix="Rp "
               placeholder="Total cicilan aktif tiap bulan (KPR, motor, pinjol, dll.)"
+              error={errors.cicilan}
             />
             <Input
               label="Total utang saat ini"
               name="utang"
               prefix="Rp "
               placeholder="Jumlah seluruh utang yang masih harus dibayar"
+              error={errors.utang}
             />
           </>
         );
@@ -353,24 +368,28 @@ const CheckupView = () => {
               name="tabungan"
               prefix="Rp "
               placeholder="Saldo yang tersimpan di rekening tabungan"
+              error={errors.tabungan}
             />
             <Input
               label="Investasi"
               name="investasi"
               prefix="Rp "
               placeholder="Total nilai dari reksadana, saham, emas, dll"
+              error={errors.investasi}
             />
             <Input
               label="Dana Darurat"
-              name="Dana Darurat"
+              name="danaDarurat"
               prefix="Rp "
               placeholder="Uang yang kamu siapkan khusus untuk kondisi darurat"
+              error={errors.dana_darurat}
             />
             <Input
               label="Total Aset"
               name="aset"
               prefix="Rp "
               placeholder="Nilai seluruh aset kamu: rumah, kendaraan, tabungan, investasi"
+              error={errors.aset}
             />
           </>
         );
@@ -527,7 +546,6 @@ const CheckupView = () => {
   };
 
   // Navigasi next or before
-  // const nextStep = () => step < 5 && setStep(step + 1);
   const nextStep = () => {
     if (validateStep()) {
       setStep((prev) => prev + 1);
@@ -542,8 +560,9 @@ const CheckupView = () => {
       showCancelButton: true,
       confirmButtonColor: "#204842",
       cancelButtonColor: "#d33",
-      cancelButtonText: "Batal",
       confirmButtonText: "Ya, kirim!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         setStep(step + 1);
