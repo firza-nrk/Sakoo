@@ -1,137 +1,201 @@
 # Backend Sakoo
 
-Selamat datang di dokumentasi untuk layanan backend Website Sakoo. Backend ini bertanggung jawab untuk mengelola data pengguna dan fitur utama kami yaitu Cek Finansial.
+**Sakoo** adalah platform perencanaan keuangan pribadi yang menyediakan layanan analisis keuangan berbasis AI. Backend ini bertanggung jawab mengelola autentikasi pengguna, koneksi database, dan fitur utama seperti **Cek Keuangan**.
 
-## Teknologi Utama
+> 💡 Sakoo: Solusi Aman Kelola dan Optimalkan Keuangan
 
-* **Database:** PostgreSQL
+## 🌐 Teknologi Utama
 
-## Prasyarat
+- **Node.js** – Backend runtime
+- **PostgreSQL** – Database relasional
+- **JWT** – JSON Web Token untuk autentikasi
+- **PM2 + Hosting** – Production deployment (DomaiNesia)
+- **Hapi.js** – Web framework
 
-Sebelum Anda dapat menjalankan backend ini secara lokal, pastikan sistem Anda telah memenuhi prasyarat berikut:
+## 📋 Prasyarat
 
-1.  **Node.js dan npm:** Pastikan Node.js dan npm (Node Package Manager) sudah terinstal. Anda bisa mengunduh dan menginstalnya dari [nodejs.org](https://nodejs.org/).
-2.  **PostgreSQL:** Pastikan server PostgreSQL sudah terinstal dan berjalan di sistem Anda atau Anda memiliki akses ke instance PostgreSQL.
+Pastikan sistem Anda memiliki:
 
-## Instalasi dan Konfigurasi
+- Node.js & npm: [Download Node.js](https://nodejs.org/)
+- PostgreSQL database aktif
 
-Ikuti langkah-langkah berikut untuk menjalankan backend ini di lingkungan pengembangan Anda:
+## ⚙️ Instalasi & Konfigurasi
 
-1.  **Clone Repository (Jika Belum):**
-    ```bash
-    git clone [https://github.com/firza-nrk/Sakoo.git](https://github.com/firza-nrk/Sakoo.git)
-    cd Sakoo
-    ```
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/sakoo-finance/sakoo.git
+   cd sakoo
 
-2.  **Checkout ke Branch `Back-End`:**
-    Kode untuk backend berada di branch `Back-End`. Pindah ke branch tersebut menggunakan perintah berikut:
-    ```bash
-    git checkout Back-End
-    ```
-    Jika Anda juga perlu mengambil perubahan terbaru dari remote branch (jika ada):
-    ```bash
-    git pull origin Back-End
-    ```
+2. **Checkout ke Branch Backend**
 
-3.  **Instal Dependensi:**
-    Setelah berada di branch `Back-End` (yang seharusnya berisi file `package.json` untuk backend), gunakan npm untuk menginstal semua dependensi proyek.
-    ```bash
-    npm install
-    ```
+   ```bash
+   git checkout Back-End
+   git pull origin Back-End
 
-4.  **Konfigurasi Koneksi Database PostgreSQL:**
-    * Anda perlu menyesuaikan konfigurasi koneksi ke database PostgreSQL Anda. Biasanya, informasi ini disimpan dalam file konfigurasi (misalnya, `.env`, `config/database.js`, `ormconfig.json`, atau variabel lingkungan).
-    * Cari file atau bagian kode yang bertanggung jawab untuk koneksi database.
-    * Sesuaikan parameter berikut dengan detail koneksi PostgreSQL Anda:
-        * `DB_HOST` atau `host`: Alamat server PostgreSQL (misalnya, `localhost`).
-        * `DB_PORT` atau `port`: Port server PostgreSQL (biasanya `5432`).
-        * `DB_USER` atau `username`: Nama pengguna untuk mengakses database.
-        * `DB_PASSWORD` atau `password`: Kata sandi untuk pengguna database.
-        * `DB_NAME` atau `database`: Nama database yang akan digunakan.
-    * **Contoh (jika menggunakan file `.env`):**
-        Buat file `.env` di root direktori backend (jika belum ada dan tidak terlacak oleh Git) dan isi dengan format seperti ini:
-        ```
-        DB_HOST=localhost
-        DB_PORT=5432
-        DB_USER=username_anda
-        DB_PASSWORD=password_anda
-        DB_NAME=nama_database_anda
-        ```
-        Pastikan Anda membuat database `nama_database_anda` di PostgreSQL Anda terlebih dahulu jika belum ada.
+3. **Instalasi Dependensi**
 
-4.  **Jalankan Migrasi Database (Jika Ada):**
-    Jika proyek ini menggunakan migrasi database (misalnya dengan Sequelize, TypeORM, Knex.js), jalankan perintah migrasi untuk membuat skema tabel yang diperlukan. Perintah spesifik akan bergantung pada ORM atau library migrasi yang digunakan.
-    ```bash
-    # Contoh (tergantung ORM/library):
-    # npm run migrate
-    # npx sequelize-cli db:migrate
-    # npx typeorm migration:run
-    ```
+   ```bash
+   npm install
+   ```
 
-5.  **Jalankan Server Backend:**
-    Setelah semua dependensi terinstal dan koneksi database dikonfigurasi, Anda dapat menjalankan server backend.
-    ```bash
-    npm start
-    # atau jika ada script dev di package.json
-    # npm run dev
-    ```
-    Server backend biasanya akan berjalan pada port tertentu (misalnya, `http://localhost:3000` atau `http://localhost:8080`). Periksa output di terminal untuk mengetahui alamat dan port yang digunakan.
+4. **Konfigurasi Environment (.env)**
+   Buat file `.env` di root folder dan isi:
 
-## Endpoint API 🔑
+   ```env
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USER=postgres
+   DB_PASSWORD=yourpassword
+   DB_NAME=sakoo_db
+   JWT_SECRET=your_jwt_secret
+   ```
 
-Berikut adalah beberapa endpoint API utama yang tersedia:
+5. **Jalankan Server**
 
-### 1. Registrasi Pengguna
+   ```bash
+   npm start
+   # atau
+   npm run dev
+   ```
 
-* **Method:** `POST`
-* **Endpoint:** `/register`
-* **Deskripsi:** Mendaftarkan pengguna baru ke sistem.
-* **Request Body:** `application/json`
-    ```json
-    {
-      "name": "string",
-      "email": "string",
-      "password": "string"
-    }
-    ```
-    * `name` (string): Nama lengkap pengguna.
-    * `email` (string): Alamat email pengguna (harus unik).
-    * `password` (string): Kata sandi pengguna.
+---
 
-* **Success Response (201 Created):**
-    ```json
-    {
-      "message": "User registered successfully"
-    }
-    ```
-* **Error Response:** (Contoh)
-    * `400 Bad Request`: Jika data tidak valid atau ada field yang kurang.
-    * `409 Conflict`: Jika email sudah terdaftar.
+## 🚀 Endpoint API
 
-### 2. Login Pengguna
+| Method | Endpoint  | Deskripsi                    | Autentikasi |
+| ------ | --------- | ---------------------------- | ----------- |
+| POST   | /register | Registrasi akun pengguna     | ❌           |
+| POST   | /login    | Login dan dapatkan token JWT | ❌           |
+| POST   | /predict  | Analisis keuangan pengguna   | ✅ JWT       |
+| GET    | /user     | Info pengguna yang login     | ✅ JWT       |
 
-* **Method:** `POST`
-* **Endpoint:** `/login`
-* **Deskripsi:** Mengautentikasi pengguna yang sudah ada dan mengembalikan token JWT.
-* **Request Body:** `application/json`
-    ```json
-    {
-      "email": "string",
-      "password": "string"
-    }
-    ```
-    * `email` (string): Alamat email pengguna yang terdaftar.
-    * `password` (string): Kata sandi pengguna.
+---
 
-* **Success Response (200 OK):**
-    ```json
-    {
-      "message": "Login successful",
-      "token": "jwttoken"
-    }
-    ```
-    * `token` (string): JSON Web Token untuk autentikasi pada request selanjutnya.
+### 🔐 `/register` - Registrasi Pengguna
 
-* **Error Response:** (Contoh)
-    * `400 Bad Request`: Jika data tidak valid.
-    * `401 Unauthorized`: Jika email atau password salah.
+```http
+POST /register
+Content-Type: application/json
+```
+
+**Body:**
+
+```json
+{
+  "name": "Budi",
+  "email": "budi@email.com",
+  "password": "rahasia123"
+}
+```
+
+**Success (201):**
+
+```json
+{ "message": "User registered successfully" }
+```
+
+---
+
+### 🔐 `/login` - Login Pengguna
+
+```http
+POST /login
+Content-Type: application/json
+```
+
+**Body:**
+
+```json
+{
+  "email": "budi@email.com",
+  "password": "rahasia123"
+}
+```
+
+**Success (200):**
+
+```json
+{
+  "message": "Login successful",
+  "token": "jwt_token_here"
+}
+```
+
+---
+
+### 📊 `/predict` - Checkup Keuangan
+
+```http
+POST /predict
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+**Body:**
+
+```json
+{
+  "income": 10000000,
+  "expenses": 8000000,
+  "savings": 100000,
+  "installments": 1000000,
+  "emergency_fund": 50000,
+  "assets": 30000000,
+  "debt": 5000000
+}
+```
+
+**Response (200):**
+
+```json
+{
+  "ai_advice": {
+    "kondisi": "Keuangan Stabil",
+    "motivasi": "Terus semangat dalam mengelola keuangan Anda!",
+    "saran": [
+      {
+        "title": "Tingkatkan Dana Darurat",
+        "desc": "* Dana darurat Anda sangat rendah. Idealnya minimal 3x pengeluaran bulanan."
+      },
+      {
+        "title": "Evaluasi Cicilan",
+        "desc": "* Total cicilan masih wajar, tapi pastikan tidak lebih dari 30% pendapatan."
+      }
+    ]
+  }
+}
+```
+
+---
+
+### 👤 `/user` - Info Pengguna
+
+```http
+GET /user
+Authorization: Bearer <jwt_token>
+```
+
+**Response (200):**
+
+```json
+{
+  "user_id": "uuid",
+  "name": "Budi",
+  "email": "budi@email.com"
+}
+```
+
+---
+
+## 🔗 Link Produksi
+
+* 🌐 Website: [https://sakoo.my.id](https://sakoo.my.id)
+* 📦 Backend API: [https://hapi.sakoo.my.id](https://hapi.sakoo.my.id)
+* 🤖 AI/Model API: [https://flask.sakoo.my.id](https://flask.sakoo.my.id)
+
+---
+
+## 👥 Kontribusi
+
+Proyek ini masih dalam tahap MVP dan pengembangan aktif. Jika Anda tertarik untuk berkontribusi dalam pengembangan backend Sakoo, silakan hubungi tim Sakoo melalui GitHub Issue atau email.
+
